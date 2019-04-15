@@ -25,7 +25,6 @@ class task(object):
         self.count_vec = CountVectorizer()
         self.tfidf = TfidfTransformer()
     
-    ''' Splitting the data into training set'''
     
     def train_data(self, data):
         data = data[['Politikbereich','Zweck','Betrag']]
@@ -79,8 +78,7 @@ class task(object):
         labels = self.lb_encode.classes_
         return labels
     
-    '''
-        Fit Countervector and Tfidf on the training dataset. '''
+    
         
     def ConterVec_fit_tfidf(self, data):
         vect_data = self.count_vec.fit_transform(data)
