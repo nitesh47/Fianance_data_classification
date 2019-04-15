@@ -84,9 +84,6 @@ if __name__ == '__main__':
         
     A = main(data)
     
-    ''' data divided into a training set and prediction set'''
-    
-
     
     text_data = A.call_remove_missing_column(data)
     text_data['Zweck'] = text_data['Zweck'].apply(A.call_clean_text)
@@ -100,7 +97,7 @@ if __name__ == '__main__':
     text_data.groupby('Politikbereich').Betrag.count().plot.bar(ylim=0)
     plt.show()
 
-    ''' Labels Encoding '''
+    
     
     bytag = text_data.groupby('Politikbereich').aggregate(np.count_nonzero)
     tags = bytag[bytag.Zweck >= 6].index
@@ -132,7 +129,6 @@ if __name__ == '__main__':
     
     '''Prediction on test dataset'''
     svm_y_pred = sgd.predict(X_test)
-    #print(A.inverse_transform_label(y_pred))
     print('accuracy %s' % accuracy_score(y_test, svm_y_pred))
     print(classification_report(y_test, svm_y_pred))
     
@@ -147,7 +143,6 @@ if __name__ == '__main__':
     
     '''Prediction on test dataset'''
     random_y_pred = random.predict(X_test)
-    #print(A.inverse_transform_label(y_pred))
     print('accuracy %s' % accuracy_score(y_test,random_y_pred))
     print(classification_report(y_test, random_y_pred))
     print(confusion_matrix(y_test, random_y_pred))
